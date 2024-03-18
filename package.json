@@ -1,0 +1,23 @@
+{
+  "name": "vue-tailwind-buttons",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanWithams/vue-tailwind-buttons.git"
+  },
+  "author": "me@danwithams.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanWithams/vue-tailwind-buttons/issues"
+  },
+  "homepage": "https://github.com/DanWithams/vue-tailwind-buttons#readme",
+  "dependencies": {
+    "tailwind-helpers": "https://github.com/DanWithams/tailwind-helpers#v1.0.0",
+    "vue": "^3.4.21"
+  }
+}
