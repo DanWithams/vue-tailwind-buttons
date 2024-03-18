@@ -8,10 +8,12 @@ let baseOuterClasses = [];
 let buttonRoundedDefault = 'rounded';
 
 export function getButtonRoundedDefault() {
+    console.log('getButtonRoundedDefault', buttonRoundedDefault);
     return buttonRoundedDefault;
 }
 
 export function setButtonRoundedDefault(rounded) {
+    console.log('setButtonRoundedDefault', rounded);
     buttonRoundedDefault = rounded;
 }
 
@@ -37,8 +39,8 @@ export function useBaseButton() {
 export function useButtons(props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) {
     const buttonClasses = computed(() => {
         const classes = ! props.outline
-            ? mergeTwClasses(options.classes, props.rounded || getButtonRoundedDefault())
-            : mergeTwClasses(options.classesOutline, props.rounded || getButtonRoundedDefault());
+            ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault)
+            : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault);
 
         if (props.disabled) {
             classes.push('cursor-not-allowed');
