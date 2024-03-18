@@ -5,7 +5,7 @@ import {mergeTwClasses} from "tailwind-helpers";
 let baseClasses = ['px-6', 'py-2', 'font-semibold'];
 let baseInsetClasses = [];
 let baseOuterClasses = [];
-let buttonRoundedDefault = ref('rounded');
+export const buttonRoundedDefault = ref('rounded');
 
 export function getButtonRoundedDefault() {
     console.log('getButtonRoundedDefault', buttonRoundedDefault.value);
