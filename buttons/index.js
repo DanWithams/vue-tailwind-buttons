@@ -39,7 +39,7 @@ export function useBaseButton() {
 
 export const makeUseButtons = () => {
     return (props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
-        const buttonRoundedDefault = computed(() => buttonRoundedDefaultCore.value);
+        const buttonRoundedDefault = computed(() => console.log('computed', buttonRoundedDefaultCore.value) || buttonRoundedDefaultCore.value);
         console.log(buttonRoundedDefault.value);
         const buttonClasses = computed(() => {
             const classes = ! props.outline
