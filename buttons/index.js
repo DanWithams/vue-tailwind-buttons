@@ -59,28 +59,11 @@ export const useButtons = (props, options = { classes: [], classesOutline: [], i
     console.log('useBs', getButtonRoundedDefault());
     console.log('v', value);
     console.log('vx', valueX.value);
-
-    setTimeout(() => {
-        console.log('useBs', buttonRoundedDefault.value);
-        console.log('useBs', getButtonRoundedDefault());
-        console.log('v', value);
-        console.log('vx', valueX.value);
-    }, 5000);
-
     const buttonClasses = computed(() => {
         console.log(buttonRoundedDefault.value);
         console.log(getButtonRoundedDefault());
         console.log('v', value);
         console.log('vx', valueX.value);
-
-        setTimeout(() => {
-            console.log('useBs', buttonRoundedDefault.value);
-            console.log('useBs', getButtonRoundedDefault());
-            console.log('v', value);
-            console.log('vx', valueX.value);
-        }, 6000);
-
-
         const classes = ! props.outline
             ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault.value)
             : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault.value);
