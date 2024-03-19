@@ -36,40 +36,42 @@ export function useBaseButton() {
     };
 }
 
-export const useButtons = (props, options = { buttonRoundedDefault: 'rounded', classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
-    const buttonRoundedDefault = ref(options.buttonRoundedDefault);
-    console.log('useBs::buttonRoundedDefault.value', buttonRoundedDefault.value);
-    console.log('useBs::buttonRoundedDefaultString', options.buttonRoundedDefault);
-    const buttonClasses = computed(() => {
+export const makeUseButtons = () => {
+    return (props, options = { buttonRoundedDefault: 'rounded', classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
+        const buttonRoundedDefault = ref(options.buttonRoundedDefault);
         console.log('useBs::buttonRoundedDefault.value', buttonRoundedDefault.value);
         console.log('useBs::buttonRoundedDefaultString', options.buttonRoundedDefault);
-        const classes = ! props.outline
-            ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault.value)
-            : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault.value);
+        const buttonClasses = computed(() => {
+            console.log('useBs::buttonRoundedDefault.value', buttonRoundedDefault.value);
+            console.log('useBs::buttonRoundedDefaultString', options.buttonRoundedDefault);
+            const classes = ! props.outline
+                ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault.value)
+                : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault.value);
 
-        if (props.disabled) {
-            classes.push('cursor-not-allowed');
-        }
+            if (props.disabled) {
+                classes.push('cursor-not-allowed');
+            }
 
-        return classes;
-    });
+            return classes;
+        });
 
-    const buttonInsetClasses = computed(() => {
-        console.log('useBs::buttonRoundedDefault.value', buttonRoundedDefault.value);
-        console.log('useBs::buttonRoundedDefaultString', options.buttonRoundedDefault);
-        const classes = ! props.outline
-            ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault.value)
-            : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault.value);
+        const buttonInsetClasses = computed(() => {
+            console.log('useBs::buttonRoundedDefault.value', buttonRoundedDefault.value);
+            console.log('useBs::buttonRoundedDefaultString', options.buttonRoundedDefault);
+            const classes = ! props.outline
+                ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault.value)
+                : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault.value);
 
-        if (props.disabled) {
-            classes.push('cursor-not-allowed');
-        }
+            if (props.disabled) {
+                classes.push('cursor-not-allowed');
+            }
 
-        return classes;
-    });
+            return classes;
+        });
 
-    return {
-        buttonClasses,
-        buttonInsetClasses,
-    };
+        return {
+            buttonClasses,
+            buttonInsetClasses,
+        };
+}
 }
