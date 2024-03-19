@@ -28,7 +28,6 @@ const props = defineProps({
     },
 });
 
-console.log('SFC', buttonRoundedDefault);
 console.log('SFC', getButtonRoundedDefault());
 
 const { buttonClasses, buttonInsetClasses } = useButtons(
