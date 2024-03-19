@@ -1,4 +1,5 @@
 import _ from "lodash";
+import {mergeTwClasses} from "tailwind-helpers";
 
 const base = {
     rounded: ['rounded'],
@@ -29,12 +30,13 @@ export function mergeDefaultClasses(classes) {
     const defaults = {};
     Object.keys(variants)
         .forEach(key => {
+            const rounded = _.get(classes, key + '.rounded', baseDefaults.rounded);
             defaults[key] = {
-                rounded: _.get(classes, key + '.rounded', baseDefaults.rounded),
-                classes: _.get(classes, key + '.classes', variants[key].classes),
-                classesOutline: _.get(classes, key + '.classesOutline', variants[key].classesOutline),
-                insetClasses: _.get(classes, key + '.insetClasses', variants[key].insetClasses),
-                insetClassesOutline: _.get(classes, key + '.insetClassesOutline', variants[key].insetClassesOutline),
+                baseClasses: rounded,
+                classes: mergeTwClasses(_.get(classes, key + '.classes', variants[key].classes), rounded),
+                classesOutline: mergeTwClasses(_.get(classes, key + '.classesOutline', variants[key].classesOutline), rounded),
+                insetClasses: mergeTwClasses(_.get(classes, key + '.insetClasses', variants[key].insetClasses), rounded),
+                insetClassesOutline: mergeTwClasses(_.get(classes, key + '.insetClassesOutline', variants[key].insetClassesOutline), rounded),
             }
         });
 
