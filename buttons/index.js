@@ -1,22 +1,13 @@
-import {computed, ref, triggerRef} from "vue";
+import {computed, ref} from "vue";
 import {mergeTwClasses} from "tailwind-helpers";
 
 let baseClasses = ['px-6', 'py-2', 'font-semibold'];
 let baseInsetClasses = [];
 let baseOuterClasses = [];
-let buttonRoundedDefaultCore = ref('rounded');
 
+import {getButtonRoundedDefault, setButtonRoundedDefault} from "./defaults";
 
-export function getButtonRoundedDefault() {
-    console.log('buttonRoundedDefault', buttonRoundedDefaultCore.value);
-    return buttonRoundedDefaultCore.value;
-}
-
-export function setButtonRoundedDefault(rounded) {
-    console.log('buttonRoundedDefault', rounded);
-    buttonRoundedDefaultCore.value = rounded;
-    triggerRef(buttonRoundedDefaultCore);
-}
+export {getButtonRoundedDefault, setButtonRoundedDefault};
 
 export function updateBaseButtonClasses(classes, insetClasses, outerClasses) {
     baseClasses = classes;
@@ -39,7 +30,7 @@ export function useBaseButton() {
 
 export const makeUseButtons = () => {
     return (props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
-        const buttonRoundedDefault = computed(() => console.log('computed', buttonRoundedDefaultCore.value) || buttonRoundedDefaultCore.value);
+        const buttonRoundedDefault = ref(getButtonRoundedDefault())
         console.log(buttonRoundedDefault.value);
         const buttonClasses = computed(() => {
             const classes = ! props.outline
