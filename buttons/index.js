@@ -6,6 +6,7 @@ let baseInsetClasses = [];
 let baseOuterClasses = [];
 
 import {getButtonRoundedDefault, setButtonRoundedDefault} from "./defaults";
+import ButtonPrimary from "./components/ButtonPrimary.vue";
 
 export {getButtonRoundedDefault, setButtonRoundedDefault};
 
@@ -60,5 +61,13 @@ export const makeUseButtons = () => {
             buttonClasses,
             buttonInsetClasses,
         };
+    }
+}
+
+
+export const vueButtons = {
+    install(app, options) {
+        console.log(options);
+        app.component('ButtonPrimary', ButtonPrimary)
     }
 }
