@@ -4,7 +4,7 @@ import {mergeTwClasses} from "tailwind-helpers";
 let baseClasses = ['px-6', 'py-2', 'font-semibold'];
 let baseInsetClasses = [];
 let baseOuterClasses = [];
-let buttonRoundedDefaultString;
+let buttonRoundedDefaultString = 'rounded';
 
 
 export function getButtonRoundedDefault() {
@@ -38,11 +38,13 @@ export function useBaseButton() {
 
 export const useButtons = (props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
     const buttonRoundedDefault = ref(buttonRoundedDefaultString);
-    console.log('useBs', buttonRoundedDefault.value);
-    console.log('useBs', getButtonRoundedDefault());
+    console.log('useBs::buttonRoundedDefault.value', buttonRoundedDefault.value);
+    console.log('useBs::getButtonRoundedDefault()', getButtonRoundedDefault());
+    console.log('useBs::buttonRoundedDefaultString', buttonRoundedDefaultString);
     const buttonClasses = computed(() => {
-        console.log(buttonRoundedDefault.value);
-        console.log(getButtonRoundedDefault());
+        console.log('c1::buttonRoundedDefault.value', buttonRoundedDefault.value);
+        console.log('c1::getButtonRoundedDefault()', getButtonRoundedDefault());
+        console.log('c1::buttonRoundedDefaultString', buttonRoundedDefaultString);
         const classes = ! props.outline
             ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault.value)
             : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault.value);
@@ -55,8 +57,9 @@ export const useButtons = (props, options = { classes: [], classesOutline: [], i
     });
 
     const buttonInsetClasses = computed(() => {
-        console.log(buttonRoundedDefault.value);
-        console.log(getButtonRoundedDefault());
+        console.log('c2::buttonRoundedDefault.value', buttonRoundedDefault.value);
+        console.log('c2::getButtonRoundedDefault()', getButtonRoundedDefault());
+        console.log('c2::buttonRoundedDefaultString', buttonRoundedDefaultString);
         const classes = ! props.outline
             ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault.value)
             : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault.value);
