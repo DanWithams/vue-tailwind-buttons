@@ -1,10 +1,10 @@
 import {computed, ref} from "vue";
 import {mergeTwClasses} from "tailwind-helpers";
-import {baseClasses, baseInsetClasses, baseOuterClasses, buttonRoundedDefault} from "./defaults";
+import {buttonRoundedDefault} from "./defaults";
 
-// let baseClasses = ['px-6', 'py-2', 'font-semibold'];
-// let baseInsetClasses = [];
-// let baseOuterClasses = [];
+let baseClasses = ['px-6', 'py-2', 'font-semibold'];
+let baseInsetClasses = [];
+let baseOuterClasses = [];
 // export let buttonRoundedDefault = ref('rounded');
 
 export function getButtonRoundedDefault() {
