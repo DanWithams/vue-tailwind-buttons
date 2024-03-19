@@ -9,11 +9,11 @@ let baseOuterClasses = [];
 
 let value = 'foo';
 
-export function getValue() {
+export const getValue = () => {
     return value;
 }
 
-export function setValue(v) {
+export const setValue = (v) => {
     value = v;
 }
 
