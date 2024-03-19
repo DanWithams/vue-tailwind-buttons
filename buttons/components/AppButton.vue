@@ -39,7 +39,7 @@ const classes = computed(() => {
             props.outline
                 ? _.get(defaults, props.variant + '.outline.classes')
                 : _.get(defaults, props.variant + '.solid.classes')
-        ).concat(['cursor-not-allowed']);
+        );
 });
 
 const baseClasses = computed(() => {
