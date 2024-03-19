@@ -33,7 +33,7 @@ export function mergeDefaultClasses(classes) {
             const rounded = _.get(classes, key + '.rounded', baseDefaults.rounded);
             defaults[key] = {
                 baseClasses: rounded,
-                classes: mergeTwClasses(_.get(classes, key + '.classes', variants[key].classes), rounded),
+                classes: mergeTwClasses(baseDefaults.classes, _.get(classes, key + '.classes', variants[key].classes), rounded),
                 classesOutline: mergeTwClasses(_.get(classes, key + '.classesOutline', variants[key].classesOutline), rounded),
                 insetClasses: mergeTwClasses(_.get(classes, key + '.insetClasses', variants[key].insetClasses), rounded),
                 insetClassesOutline: mergeTwClasses(_.get(classes, key + '.insetClassesOutline', variants[key].insetClassesOutline), rounded),
