@@ -31,8 +31,8 @@ const props = defineProps({
 
 const classes = computed(() => {
     return props.outline
-        ? _.get(defaults, props.variant + '.classesOutline')
-        : _.get(defaults, props.variant + '.classes')
+        ? _.get(defaults, props.variant + '.outline.classes')
+        : _.get(defaults, props.variant + '.solid.classes')
 });
 
 const baseClasses = computed(() => {
@@ -41,8 +41,8 @@ const baseClasses = computed(() => {
 
 const insetClasses = computed(() => {
     return props.outline
-        ? _.get(defaults, props.variant + '.insetClassesOutline')
-        : _.get(defaults, props.variant + '.insetClasses')
+        ? _.get(defaults, props.variant + '.outline.insetClasses')
+        : _.get(defaults, props.variant + '.solid.insetClasses')
 });
 
 </script>
