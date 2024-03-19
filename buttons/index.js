@@ -39,6 +39,7 @@ export function useBaseButton() {
 export function useButtons(props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) {
     const buttonClasses = computed(() => {
         console.log(buttonRoundedDefault.value);
+        console.log(getButtonRoundedDefault());
         const classes = ! props.outline
             ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault.value)
             : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault.value);
@@ -52,6 +53,7 @@ export function useButtons(props, options = { classes: [], classesOutline: [], i
 
     const buttonInsetClasses = computed(() => {
         console.log(buttonRoundedDefault.value);
+        console.log(getButtonRoundedDefault());
         const classes = ! props.outline
             ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault.value)
             : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault.value);
