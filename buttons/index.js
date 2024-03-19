@@ -5,34 +5,17 @@ import {buttonRoundedDefault} from "./defaults";
 let baseClasses = ['px-6', 'py-2', 'font-semibold'];
 let baseInsetClasses = [];
 let baseOuterClasses = [];
-// export let buttonRoundedDefault = ref('rounded');
+let buttonRoundedDefaultString;
 
-let value = 'foo';
-let valueX = { value: 'foo' };
-
-export const mutator = {
-    getValue() {
-        return value;
-    },
-    setValue(v) {
-        value = v;
-    },
-    getValueX() {
-        return valueX.value;
-    },
-    setValueX(v) {
-        valueX = v;
-    }
-};
 
 export function getButtonRoundedDefault() {
-    console.log('getButtonRoundedDefault', buttonRoundedDefault.value);
-    return buttonRoundedDefault.value;
+    console.log('buttonRoundedDefaultString', buttonRoundedDefaultString);
+    return buttonRoundedDefaultString;
 }
 
 export function setButtonRoundedDefault(rounded) {
-    console.log('setButtonRoundedDefault', rounded);
-    buttonRoundedDefault.value = rounded;
+    console.log('buttonRoundedDefaultString', rounded);
+    buttonRoundedDefaultString = rounded;
 }
 
 export function updateBaseButtonClasses(classes, insetClasses, outerClasses) {
@@ -55,6 +38,7 @@ export function useBaseButton() {
 }
 
 export const useButtons = (props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
+    const buttonRoundedDefault = ref(buttonRoundedDefaultString);
     console.log('useBs', buttonRoundedDefault.value);
     console.log('useBs', getButtonRoundedDefault());
     console.log('v', value);
