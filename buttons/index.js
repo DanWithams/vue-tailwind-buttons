@@ -40,11 +40,11 @@ export function useBaseButton() {
 export const makeUseButtons = () => {
     return (props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
         const buttonRoundedDefault = computed(() => buttonRoundedDefaultCore.value);
-        console.log(buttonRoundedDefault);
+        console.log(buttonRoundedDefault.value);
         const buttonClasses = computed(() => {
             const classes = ! props.outline
-                ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault)
-                : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault);
+                ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault.value)
+                : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault.value);
 
             if (props.disabled) {
                 classes.push('cursor-not-allowed');
@@ -55,8 +55,8 @@ export const makeUseButtons = () => {
 
         const buttonInsetClasses = computed(() => {
             const classes = ! props.outline
-                ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault)
-                : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault);
+                ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault.value)
+                : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault.value);
 
             if (props.disabled) {
                 classes.push('cursor-not-allowed');
