@@ -68,12 +68,12 @@ export function mergeDefaultClasses(classes) {
             defaults[key] = {
                 baseClasses: rounded,
                 solid: {
-                    classes: mergeTwClasses(baseDefaults.classes, _.get(classes, key + '.solid.classes', variants[key].classes), rounded),
-                    insetClasses: mergeTwClasses(_.get(classes, key + '.solid.insetClasses', variants[key].insetClasses), rounded),
+                    classes: mergeTwClasses(baseDefaults.classes, _.get(classes, key + '.solid.classes', variants[key].solid.classes), rounded),
+                    insetClasses: mergeTwClasses(_.get(classes, key + '.solid.insetClasses', variants[key].solid.insetClasses), rounded),
                 },
                 outline: {
-                    classes: mergeTwClasses(_.get(classes, key + '.outline.classes', variants[key].classesOutline), rounded),
-                    insetClasses: mergeTwClasses(_.get(classes, key + '.outline.insetClasses', variants[key].insetClassesOutline), rounded),
+                    classes: mergeTwClasses(_.get(classes, key + '.outline.classes', variants[key].outline.classes), rounded),
+                    insetClasses: mergeTwClasses(_.get(classes, key + '.outline.insetClasses', variants[key].outline.insetClasses), rounded),
                 }
             }
         });
