@@ -1,5 +1,5 @@
 <template>
-    <button type="button" class="focus:outline-none group" :class="classes" disabled="disabled">
+    <button type="button" class="focus:outline-none group" :class="classes" :disabled="disabled">
         <div class="relative select-none" :class="baseClasses">
             <div class="absolute inset-0" :class="insetClasses"></div>
             <div class="flex flex-row justify-center items-center">
