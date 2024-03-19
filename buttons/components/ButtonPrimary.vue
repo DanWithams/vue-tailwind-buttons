@@ -8,7 +8,7 @@
 
 <script setup>
 import BaseButton from "./BaseButton.vue";
-import {useButtons, buttonRoundedDefault} from "../index";
+import {useButtons, buttonRoundedDefault, getButtonRoundedDefault} from "../index";
 
 const props = defineProps({
     outline: {
@@ -27,6 +27,9 @@ const props = defineProps({
         default: null,
     },
 });
+
+console.log('SFC', buttonRoundedDefault);
+console.log('SFC', getButtonRoundedDefault());
 
 const { buttonClasses, buttonInsetClasses } = useButtons(
     props,
