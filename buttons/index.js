@@ -66,10 +66,9 @@ export const makeUseButtons = () => {
 
 
 export const vueButtons = {
-    install(app, options) {
+    install(app, options = { defaults: {} }) {
         console.log('vueButtons', options);
         console.log('vueButtons', getButtonRoundedDefault());
-
-        app.component('ButtonPrimary', ButtonPrimary)
+        app.provide('vueButtonDefaults', options.defaults);
     }
 }

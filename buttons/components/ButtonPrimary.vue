@@ -9,6 +9,9 @@
 <script setup>
 import BaseButton from "./BaseButton.vue";
 import {makeUseButtons, getButtonRoundedDefault} from "../index";
+import {inject} from "vue";
+
+const defaults = inject('vueButtonDefaults');
 
 const props = defineProps({
     outline: {
@@ -24,7 +27,7 @@ const props = defineProps({
     rounded: {
         type: [String, null],
         required: false,
-        default: null,
+        default: defaults.rounded || null,
     },
 });
 
