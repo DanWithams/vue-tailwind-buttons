@@ -4,17 +4,17 @@ import {mergeTwClasses} from "tailwind-helpers";
 let baseClasses = ['px-6', 'py-2', 'font-semibold'];
 let baseInsetClasses = [];
 let baseOuterClasses = [];
-let buttonRoundedDefaultString = 'rounded';
+export let buttonRoundedDefault = 'rounded';
 
 
 export function getButtonRoundedDefault() {
-    console.log('buttonRoundedDefaultString', buttonRoundedDefaultString);
-    return buttonRoundedDefaultString;
+    console.log('buttonRoundedDefault', buttonRoundedDefault);
+    return buttonRoundedDefault;
 }
 
 export function setButtonRoundedDefault(rounded) {
-    console.log('buttonRoundedDefaultString', rounded);
-    buttonRoundedDefaultString = rounded;
+    console.log('buttonRoundedDefault', rounded);
+    buttonRoundedDefault = rounded;
 }
 
 export function updateBaseButtonClasses(classes, insetClasses, outerClasses) {
@@ -36,15 +36,13 @@ export function useBaseButton() {
     };
 }
 
-export const useButtons = (props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
-    const buttonRoundedDefault = ref(buttonRoundedDefaultString);
+export const useButtons = (props, options = { buttonRoundedDefault: 'rounded', classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
+    const buttonRoundedDefault = ref(options.buttonRoundedDefault);
     console.log('useBs::buttonRoundedDefault.value', buttonRoundedDefault.value);
-    console.log('useBs::getButtonRoundedDefault()', getButtonRoundedDefault());
-    console.log('useBs::buttonRoundedDefaultString', buttonRoundedDefaultString);
+    console.log('useBs::buttonRoundedDefaultString', options.buttonRoundedDefault);
     const buttonClasses = computed(() => {
-        console.log('c1::buttonRoundedDefault.value', buttonRoundedDefault.value);
-        console.log('c1::getButtonRoundedDefault()', getButtonRoundedDefault());
-        console.log('c1::buttonRoundedDefaultString', buttonRoundedDefaultString);
+        console.log('useBs::buttonRoundedDefault.value', buttonRoundedDefault.value);
+        console.log('useBs::buttonRoundedDefaultString', options.buttonRoundedDefault);
         const classes = ! props.outline
             ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault.value)
             : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault.value);
@@ -57,9 +55,8 @@ export const useButtons = (props, options = { classes: [], classesOutline: [], i
     });
 
     const buttonInsetClasses = computed(() => {
-        console.log('c2::buttonRoundedDefault.value', buttonRoundedDefault.value);
-        console.log('c2::getButtonRoundedDefault()', getButtonRoundedDefault());
-        console.log('c2::buttonRoundedDefaultString', buttonRoundedDefaultString);
+        console.log('useBs::buttonRoundedDefault.value', buttonRoundedDefault.value);
+        console.log('useBs::buttonRoundedDefaultString', options.buttonRoundedDefault);
         const classes = ! props.outline
             ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault.value)
             : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault.value);
