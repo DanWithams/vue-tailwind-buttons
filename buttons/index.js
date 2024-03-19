@@ -54,8 +54,6 @@ export const makeUseButtons = () => {
         });
 
         const buttonInsetClasses = computed(() => {
-            console.log('useBs::buttonRoundedDefault.value', buttonRoundedDefault.value);
-            console.log('useBs::buttonRoundedDefaultString', options.buttonRoundedDefault);
             const classes = ! props.outline
                 ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault.value)
                 : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault.value);

@@ -8,7 +8,7 @@
 
 <script setup>
 import BaseButton from "./BaseButton.vue";
-import {makeUseButtons, getButtonRoundedDefault} from "../index";
+import {makeUseButtons} from "../index";
 
 const props = defineProps({
     outline: {
@@ -28,14 +28,11 @@ const props = defineProps({
     },
 });
 
-console.log('SFC', getButtonRoundedDefault());
-
 const useButtons = makeUseButtons();
 
 const { buttonClasses, buttonInsetClasses } = useButtons(
     props,
     {
-        buttonRoundedDefault : getButtonRoundedDefault(),
         classes: [ 'bg-indigo-400', 'text-zinc-100', 'dark:bg-indigo-500', 'hover:bg-indigo-500', 'dark:hover:bg-indigo-700', 'focus:bg-indigo-500', 'dark:focus:bg-indigo-700' ],
         classesOutline: [ 'bg-transparent', 'text-indigo-400', 'dark:text-indigo-500', 'hover:text-indigo-500', 'dark:hover:text-indigo-700', 'focus:text-indigo-500', 'dark:focus:text-indigo-700' ],
         insetClasses: [ 'border-0' ],
