@@ -10,6 +10,7 @@
 </template>
 
 <script setup>
+// Deprecated Component
 import {mergeTwClasses} from "tailwind-helpers";
 import {useBaseButton} from "../index";
 
