@@ -21,7 +21,7 @@ export const mutator = {
         return valueX.value;
     },
     setValueX(v) {
-        valueX.value = v;
+        valueX = v;
     }
 };
 
