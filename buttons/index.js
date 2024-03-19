@@ -8,14 +8,22 @@ let baseOuterClasses = [];
 // export let buttonRoundedDefault = ref('rounded');
 
 let value = 'foo';
+let valueX = { value: 'foo' };
 
-export const getValue = () => {
-    return value;
-}
-
-export const setValue = (v) => {
-    value = v;
-}
+export const mutator = {
+    getValue() {
+        return value;
+    },
+    setValue(v) {
+        value = v;
+    },
+    getValueX() {
+        return valueX.value;
+    },
+    setValueX(v) {
+        valueX.value = v;
+    }
+};
 
 export function getButtonRoundedDefault() {
     console.log('getButtonRoundedDefault', buttonRoundedDefault.value);
@@ -50,10 +58,12 @@ export function useButtons(props, options = { classes: [], classesOutline: [], i
     console.log('useBs', buttonRoundedDefault.value);
     console.log('useBs', getButtonRoundedDefault());
     console.log('v', value);
+    console.log('vx', valueX.value);
     const buttonClasses = computed(() => {
         console.log(buttonRoundedDefault.value);
         console.log(getButtonRoundedDefault());
         console.log('v', value);
+        console.log('vx', valueX.value);
         const classes = ! props.outline
             ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault.value)
             : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault.value);
@@ -69,6 +79,7 @@ export function useButtons(props, options = { classes: [], classesOutline: [], i
         console.log(buttonRoundedDefault.value);
         console.log(getButtonRoundedDefault());
         console.log('v', value);
+        console.log('vx', valueX.value);
         const classes = ! props.outline
             ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault.value)
             : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault.value);
