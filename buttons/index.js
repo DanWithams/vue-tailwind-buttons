@@ -37,8 +37,10 @@ export function useBaseButton() {
 }
 
 export const makeUseButtons = () => {
+    console.log('makeUseButtons', getButtonRoundedDefault());
     return (props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
-        const buttonRoundedDefault = ref(buttonRoundedDefaultCore);
+        console.log('useButtons', getButtonRoundedDefault());
+        const buttonRoundedDefault = ref(getButtonRoundedDefault());
         const buttonClasses = computed(() => {
             const classes = ! props.outline
                 ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault.value)
