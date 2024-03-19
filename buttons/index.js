@@ -30,8 +30,8 @@ export function useBaseButton() {
 }
 
 export const makeUseButtons = () => {
-    return (props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
-        const buttonRoundedDefault = ref(getButtonRoundedDefault())
+    return (props, options = { rounded: 'rounded', classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
+        const buttonRoundedDefault = ref(options.rounded)
         console.log(buttonRoundedDefault.value);
         const buttonClasses = computed(() => {
             const classes = ! props.outline
