@@ -8,7 +8,9 @@
 
 <script setup>
 import BaseButton from "./BaseButton.vue";
-import {makeUseButtons} from "../index";
+// import {makeUseButtons} from "../index";
+
+const {makeUseButtons} = require("../index")
 
 const props = defineProps({
     outline: {
