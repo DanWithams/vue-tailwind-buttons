@@ -8,10 +8,10 @@
 
 <script setup>
 import BaseButton from "./BaseButton.vue";
-import {makeUseButtons, getButtonRoundedDefault} from "../index";
+import {useButtons} from "../index";
 import {inject} from "vue";
 
-const defaults = inject('vueButtonDefaults');
+const { primary } = inject('vueButtonDefaults');
 
 const props = defineProps({
     outline: {
@@ -31,12 +31,10 @@ const props = defineProps({
     },
 });
 
-const useButtons = makeUseButtons();
-
 const { buttonClasses, buttonInsetClasses } = useButtons(
     props,
     {
-        rounded: defaults.rounded,
+        rounded: props.rounded || primary.rounded,
         classes: [ 'bg-indigo-400', 'text-zinc-100', 'dark:bg-indigo-500', 'hover:bg-indigo-500', 'dark:hover:bg-indigo-700', 'focus:bg-indigo-500', 'dark:focus:bg-indigo-700' ],
         classesOutline: [ 'bg-transparent', 'text-indigo-400', 'dark:text-indigo-500', 'hover:text-indigo-500', 'dark:hover:text-indigo-700', 'focus:text-indigo-500', 'dark:focus:text-indigo-700' ],
         insetClasses: [ 'border-0' ],
