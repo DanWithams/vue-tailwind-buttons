@@ -8,7 +8,7 @@
 
 <script setup>
 import BaseButton from "./BaseButton.vue";
-import {useButtons, buttonRoundedDefault, getButtonRoundedDefault} from "../index";
+import {useButtons, getButtonRoundedDefault} from "../index";
 
 const props = defineProps({
     outline: {
