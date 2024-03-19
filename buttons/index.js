@@ -64,11 +64,12 @@ export const makeUseButtons = () => {
     }
 }
 
-
-export const vueButtons = {
-    install(app, options = { defaults: {} }) {
-        console.log('vueButtons', options);
-        console.log('vueButtons', getButtonRoundedDefault());
-        app.provide('vueButtonDefaults', options.defaults);
+export const createVueButtons = (options = { defaults: {} }) => {
+    return {
+        install(app) {
+            console.log('vueButtons', options);
+            console.log('vueButtons', getButtonRoundedDefault());
+            app.provide('vueButtonDefaults', options.defaults);
+        }
     }
 }
