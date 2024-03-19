@@ -1,20 +1,21 @@
-import {computed, ref} from "vue";
+import {computed, ref, triggerRef} from "vue";
 import {mergeTwClasses} from "tailwind-helpers";
 
 let baseClasses = ['px-6', 'py-2', 'font-semibold'];
 let baseInsetClasses = [];
 let baseOuterClasses = [];
-let buttonRoundedDefaultCore = 'rounded';
+let buttonRoundedDefaultCore = ref('rounded');
 
 
 export function getButtonRoundedDefault() {
-    console.log('buttonRoundedDefault', buttonRoundedDefaultCore);
-    return buttonRoundedDefaultCore;
+    console.log('buttonRoundedDefault', buttonRoundedDefaultCore.value);
+    return buttonRoundedDefaultCore.value;
 }
 
 export function setButtonRoundedDefault(rounded) {
     console.log('buttonRoundedDefault', rounded);
-    buttonRoundedDefaultCore = rounded;
+    buttonRoundedDefaultCore.value = rounded;
+    triggerRef(buttonRoundedDefaultCore);
 }
 
 export function updateBaseButtonClasses(classes, insetClasses, outerClasses) {
@@ -37,14 +38,13 @@ export function useBaseButton() {
 }
 
 export const makeUseButtons = () => {
-    console.log('makeUseButtons', getButtonRoundedDefault());
     return (props, options = { classes: [], classesOutline: [], insetClasses: [], insetClassesOutline: [] }) => {
-        console.log('useButtons', getButtonRoundedDefault());
-        const buttonRoundedDefault = ref(getButtonRoundedDefault());
+        const buttonRoundedDefault = computed(() => buttonRoundedDefaultCore.value);
+        console.log(buttonRoundedDefault);
         const buttonClasses = computed(() => {
             const classes = ! props.outline
-                ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault.value)
-                : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault.value);
+                ? mergeTwClasses(options.classes, props.rounded || buttonRoundedDefault)
+                : mergeTwClasses(options.classesOutline, props.rounded || buttonRoundedDefault);
 
             if (props.disabled) {
                 classes.push('cursor-not-allowed');
@@ -55,8 +55,8 @@ export const makeUseButtons = () => {
 
         const buttonInsetClasses = computed(() => {
             const classes = ! props.outline
-                ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault.value)
-                : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault.value);
+                ? mergeTwClasses(options.insetClasses, props.rounded || buttonRoundedDefault)
+                : mergeTwClasses(options.insetClassesOutline, props.rounded || buttonRoundedDefault);
 
             if (props.disabled) {
                 classes.push('cursor-not-allowed');
