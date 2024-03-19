@@ -35,9 +35,10 @@ const props = defineProps({
 });
 
 const classes = computed(() => {
-    return props.outline
-        ? _.get(defaults, props.variant + '.outline.classes')
-        : _.get(defaults, props.variant + '.solid.classes');
+    return (props.outline
+                ? _.get(defaults, props.variant + '.outline.classes')
+                : _.get(defaults, props.variant + '.solid.classes')
+        ).concat(props.disabled ? ['cursor-not-allowed'] : [])
 });
 
 const baseClasses = computed(() => {
