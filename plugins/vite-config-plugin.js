@@ -31,11 +31,11 @@ export default function configPlugin(options = {}) {
                 },
             };
         },
-        handleHotUpdate({ file, server }) {
+        async handleHotUpdate({ file, server }) {
             if (file === configPath) {
                 console.log(`Reloading configuration due to change in ${file}`);
                 // Re-import the config file
-                const configData = JSON.parse(readFileSync(configPath, 'utf-8'));
+                configData = await loadConfig(configPath);
                 // Update the define values
                 server.config.define = {
                     __VUE_TAILWIND_BUTTONS_EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
