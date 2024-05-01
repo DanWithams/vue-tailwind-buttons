@@ -25,9 +25,10 @@ export default function configPlugin(options = {}) {
                 const configData = JSON.parse(readFileSync(configPath, 'utf-8'));
                 // Update the define values
                 server.config.define = {
-                    __EXTERNAL_CONFIG__: JSON.stringify(configData),
+                    __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
                 // Trigger a full reload
+                server.moduleGraph.invalidateAll();
                 server.ws.send({
                     type: 'full-reload',
                 });
