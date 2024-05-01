@@ -1,10 +1,5 @@
 import { readFileSync } from 'fs';
-import { fileURLToPath } from 'url';
 import path from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 
 export default function configPlugin() {
     return {
@@ -12,7 +7,7 @@ export default function configPlugin() {
         enforce: 'pre',        // run before other plugins
         config() {
             // Read and parse the configuration file
-            const configPath = path.resolve(__dirname, 'vue-tailwind-button.config.json');
+            const configPath = path.resolve(process.cwd(), 'config/config.json');
             const configData = JSON.parse(readFileSync(configPath, 'utf-8'));
 
             // Return a modified configuration object
