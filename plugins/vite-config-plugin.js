@@ -20,18 +20,50 @@ export default function configPlugin(options = {}) {
         },
         handleHotUpdate({ file, server }) {
             if (file === configPath) {
+                // console.log(`Reloading configuration due to change in ${file}`);
+                // // Re-import the config file
+                // const configData = JSON.parse(readFileSync(configPath, 'utf-8'));
+                // // Update the define values
+                // server.config.define = {
+                //     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
+                // };
+                // // Trigger a full reload
+                // server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
+                // server.ws.send({
+                //     type: 'full-reload',
+                // });
+                // return [];
+
                 console.log(`Reloading configuration due to change in ${file}`);
-                // Re-import the config file
-                const configData = JSON.parse(readFileSync(configPath, 'utf-8'));
+
+                // Attempt to read and parse the config file
+                let configData;
+                try {
+                    configData = JSON.parse(readFileSync(configPath, 'utf-8'));
+                } catch (e) {
+                    console.error(`Error reading or parsing config file: ${e}`);
+                    return []; // Optionally, handle this error more gracefully
+                }
+
                 // Update the define values
-                server.config.define = {
-                    __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
-                };
+                try {
+                    server.config.define = {
+                        __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
+                    };
+                } catch (e) {
+                    console.error(`Error updating server config defines: ${e}`);
+                }
+
                 // Trigger a full reload
-                server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
-                server.ws.send({
-                    type: 'full-reload',
-                });
+                try {
+                    server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
+                    server.ws.send({
+                        type: 'full-reload',
+                    });
+                } catch (e) {
+                    console.error(`Error triggering full reload: ${e}`);
+                }
+
                 return [];
             }
         }
