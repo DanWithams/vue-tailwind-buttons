@@ -29,7 +29,7 @@ export default function configPlugin(options = {}) {
                 },
             };
         },
-        async configPlugin({ file, server }) {
+        async handleHotUpdate({ file, server }) {
             if (file === configPath) {
                 console.log(`Reloading configuration due to change in ${file}`);
                 // Re-import the config file
