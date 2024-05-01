@@ -37,6 +37,7 @@ export default function configPlugin(options = {}) {
                 // Re-import the config file
                 configData = await loadConfig(configPath);
                 // Update the define values
+                console.log(configData);
                 server.config.define = {
                     __VUE_TAILWIND_BUTTONS_EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
