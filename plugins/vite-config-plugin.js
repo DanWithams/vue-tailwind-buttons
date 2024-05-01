@@ -22,7 +22,7 @@ export default function configPlugin(options = {}) {
         async config() {
             // Return a modified configuration object
             const configData = await loadConfig(configPath);
-            console.log('config()', configData)
+            console.log('config()', JSON.stringify(configData))
             return {
                 define: {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData),
@@ -35,31 +35,10 @@ export default function configPlugin(options = {}) {
                 // Re-import the config file
                 const configData = await loadConfig(configPath);
                 // Update the define values
-                console.log(JSON.stringify(configData || {}));
+                console.log('handleHotUpdate()', JSON.stringify(configData || {}));
                 server.config.define = {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
-                // server.config.define = {
-                //     __EXTERNAL_CONFIG__: JSON.stringify({
-                //         "primary": {
-                //             "solid": {
-                //                 "classes": [
-                //                     "bg-red-400",
-                //                     "text-zinc-100",
-                //                     "dark:bg-red-500",
-                //                     "hover:bg-indigo-500",
-                //                     "dark:hover:bg-indigo-700",
-                //                     "focus:bg-indigo-500",
-                //                     "dark:focus:bg-indigo-700"
-                //                 ],
-                //                 "insetClasses": [
-                //                     "border-0"
-                //                 ]
-                //             }
-                //         }
-                //     }),
-                // };
-                // Trigger a full reload
                 server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
                 server.ws.send({
                     type: 'full-reload',
