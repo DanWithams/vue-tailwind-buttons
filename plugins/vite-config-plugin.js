@@ -31,6 +31,7 @@ export default function configPlugin(options = {}) {
         },
         config() {
             // Return a modified configuration object
+            console.log('config()', configData)
             return {
                 define: {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData),
