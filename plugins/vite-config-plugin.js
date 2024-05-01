@@ -46,9 +46,7 @@ export default function configPlugin(options = {}) {
                     server.config.define,
                 );
 
-                server.config.define = {
-                    __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
-                };
+                server.config.define.__EXTERNAL_CONFIG__ = JSON.stringify(configData || {});
 
                 const modulePath = path.resolve(__dirname, '../');
 
