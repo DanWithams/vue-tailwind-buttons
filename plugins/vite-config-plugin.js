@@ -32,38 +32,28 @@ export default function configPlugin(options = {}) {
                 },
             };
         },
-        // async handleHotUpdate({ file, server }) {
-        //     if (file === configPath) {
-        //         console.log(`Reloading configuration due to change in ${file}`);
-        //         // Re-import the config file
-        //         const configData = await loadConfig(configPath);
-        //         // Update the define values
-        //         console.log('handleHotUpdate()', JSON.stringify(configData || {}));
-        //
-        //         server.config.define.__EXTERNAL_CONFIG__ = JSON.stringify(configData || {});
-        //
-        //         const modulePath = path.resolve(__dirname, '../');
-        //
-        //         console.log('modulePath', modulePath);
-        //         console.log('idToModuleMap', Array.from(server.moduleGraph.idToModuleMap.keys()));
-        //
-        //         for (const [id, module] of server.moduleGraph.idToModuleMap.entries()) {
-        //             // Check if the module ID starts with the target path ignoring any query parameters
-        //             if (id.startsWith(modulePath)) {
-        //                 console.log(`Invalidating module: ${id} ${module}`);
-        //                 // Invalidate this module
-        //                 server.moduleGraph.invalidateModule(module);
-        //             }
-        //         }
-        //
-        //         console.log('idToModuleMap', Array.from(server.moduleGraph.idToModuleMap.keys()));
-        //
-        //         server.ws.send({
-        //             type: 'full-reload',
-        //         });
-        //
-        //         return [];
-        //     }
-        // }
+        async handleHotUpdate({ file, server }) {
+            if (file === configPath) {
+                console.log(`Reloading configuration due to change in ${file}`);
+                // Re-import the config file
+                const configData = await loadConfig(configPath);
+                // Update the define values
+                console.log('handleHotUpdate()', JSON.stringify(configData || {}));
+
+                server.config.define.__EXTERNAL_CONFIG__ = JSON.stringify(configData || {});
+
+                const allModules = Array.from(server.moduleGraph.urlToModuleMap.values());
+                allModules.forEach(module => {
+                    server.moduleGraph.invalidateModule(module);
+                    console.log('Module invalidated:', module.url);
+                });
+
+                server.ws.send({
+                    type: 'full-reload',
+                });
+
+                return [];
+            }
+        }
     };
 }
