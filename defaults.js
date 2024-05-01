@@ -101,4 +101,6 @@ export function mergeDefaultClasses(classes) {
     return defaults;
 }
 
+console.log(__VUE_TAILWIND_BUTTONS_EXTERNAL_CONFIG__);
+
 export const defaultClasses = mergeDefaultClasses(__VUE_TAILWIND_BUTTONS_EXTERNAL_CONFIG__);
