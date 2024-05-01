@@ -44,23 +44,17 @@ export default function configPlugin(options = {}) {
                 };
 
                 const modulePath = path.resolve(__dirname, '../defaults.js');
-                console.log('modulePath', modulePath);
-                const module = server.moduleGraph.getModuleById(modulePath);
-                console.log('module', module);
-                if (module) {
-                    // Invalidate the module to force a re-import
-                    await server.moduleGraph.invalidateModule(module);
-                }
 
                 console.log('idToModuleMap', Array.from(server.moduleGraph.idToModuleMap.keys()));
 
-                server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
-                server.ws.send({
-                    type: 'full-reload',
-                });
-                server.ws.send({
-                    type: 'full-reload',
-                });
+                for (const [id, module] of server.moduleGraph.idToModuleMap.entries()) {
+                    // Check if the module ID starts with the target path ignoring any query parameters
+                    if (id.startsWith(modulePath)) {
+                        console.log(`Invalidating module: ${id} ${module}`);
+                        // Invalidate this module
+                        server.moduleGraph.invalidateModule(module);
+                    }
+                }
                 return [];
             }
         }
