@@ -52,6 +52,9 @@ export default function configPlugin(options = {}) {
                     await server.moduleGraph.invalidateModule(module);
                 }
 
+                console.log('idToModuleMap', Array.from(server.moduleGraph.idToModuleMap.keys()));
+
+
                 server.ws.send({
                     type: 'full-reload',
                 });
