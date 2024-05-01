@@ -54,7 +54,10 @@ export default function configPlugin(options = {}) {
 
                 console.log('idToModuleMap', Array.from(server.moduleGraph.idToModuleMap.keys()));
 
-
+                server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
+                server.ws.send({
+                    type: 'full-reload',
+                });
                 server.ws.send({
                     type: 'full-reload',
                 });
