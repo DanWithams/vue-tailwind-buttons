@@ -21,11 +21,11 @@ export default function configPlugin(options = {}) {
         // enforce: 'pre',        // run before other plugins
         async config() {
             // Return a modified configuration object
-            const a = await loadConfig(configPath);
-            console.log('config()', a)
+            const configData = await loadConfig(configPath);
+            console.log('config()', configData)
             return {
                 define: {
-                    __EXTERNAL_CONFIG__: JSON.stringify(a),
+                    __EXTERNAL_CONFIG__: JSON.stringify(configData),
                 },
             };
         },
@@ -33,7 +33,7 @@ export default function configPlugin(options = {}) {
             if (file === configPath) {
                 console.log(`Reloading configuration due to change in ${file}`);
                 // Re-import the config file
-                configData = await loadConfig(configPath);
+                const configData = await loadConfig(configPath);
                 // Update the define values
                 console.log(JSON.stringify(configData || {}));
                 server.config.define = {
