@@ -39,6 +39,13 @@ export default function configPlugin(options = {}) {
                 const configData = await loadConfig(configPath);
                 // Update the define values
                 console.log('handleHotUpdate()', JSON.stringify(configData || {}));
+
+                console.log(
+                    server,
+                    server.config,
+                    server.config.define,
+                );
+
                 server.config.define = {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
@@ -56,6 +63,8 @@ export default function configPlugin(options = {}) {
                         server.moduleGraph.invalidateModule(module);
                     }
                 }
+
+                console.log('idToModuleMap', Array.from(server.moduleGraph.idToModuleMap.keys()));
 
                 server.ws.send({
                     type: 'full-reload',
