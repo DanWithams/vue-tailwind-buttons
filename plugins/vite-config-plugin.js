@@ -39,6 +39,9 @@ export default function configPlugin(options = {}) {
                 server.config.define = {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
+
+                console.log('moduleGraph', JSON.stringify(server.moduleGraph.urlToModuleMap.values()));
+
                 server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
                 server.ws.send({
                     type: 'full-reload',
