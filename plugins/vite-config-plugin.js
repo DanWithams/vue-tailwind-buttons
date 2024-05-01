@@ -40,7 +40,7 @@ export default function configPlugin(options = {}) {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
 
-                const modulePath = path.resolve('defaults.js');
+                const modulePath = path.resolve(__dirname, './defaults.js');
                 console.log('modulePath', modulePath);
                 const module = server.moduleGraph.getModuleById(modulePath);
                 console.log('module', module);
