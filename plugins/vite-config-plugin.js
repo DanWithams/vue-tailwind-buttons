@@ -28,7 +28,6 @@ export default function configPlugin(options = {}) {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
                 // Trigger a full reload
-                server.moduleGraph.invalidateAll();
                 server.ws.send({
                     type: 'full-reload',
                 });
