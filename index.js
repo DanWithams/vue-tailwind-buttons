@@ -1,9 +1,5 @@
-import {mergeDefaultClasses} from "./defaults";
+import ButtonPrimary from "./src/components/ButtonPrimary.vue";
 
-export const createVueButtons = (options = { classes: {} }) => {
-    return {
-        install(app) {
-            app.provide('vueButtonDefaults', mergeDefaultClasses(options.classes));
-        }
-    }
+export default {
+    ButtonPrimary
 }
