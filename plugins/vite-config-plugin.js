@@ -40,7 +40,10 @@ export default function configPlugin(options = {}) {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
 
-                console.log('moduleGraph', JSON.stringify({data:server.moduleGraph.urlToModuleMap.values()}));
+                const allModules = Array.from(server.moduleGraph.urlToModuleMap.values());
+                allModules.forEach(module => {
+                    console.log('allModules', module.file); // Logs the absolute path of each module
+                });
 
                 server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
                 server.ws.send({
