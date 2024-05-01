@@ -8,7 +8,6 @@ async function loadConfig(configPath) {
         const configModule = await import(configPath + '?update=' + new Date().getTime());
         return configModule.default || {};
     } catch (error) {
-        console.error('Failed to load config:', error);
         return {};
     }
 }
