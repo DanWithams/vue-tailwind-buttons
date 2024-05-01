@@ -3,7 +3,7 @@ import path from 'path';
 
 // Async function to load config
 async function loadConfig(configPath) {
-    delete require.cache[require.resolve(configPath)];
+    // delete require.cache[require.resolve(configPath)];
     try {
         const configModule = await import(configPath + '?update=' + new Date().getTime());
         return configModule.default || {};
