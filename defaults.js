@@ -101,4 +101,6 @@ export function mergeDefaultClasses(classes) {
     return defaults;
 }
 
+console.log(__EXTERNAL_CONFIG__);
+
 export const defaultClasses = mergeDefaultClasses(__EXTERNAL_CONFIG__);
