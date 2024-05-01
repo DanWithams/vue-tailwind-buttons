@@ -11,10 +11,9 @@
 
 <script setup>
 
-import {computed, inject} from "vue";
+import {computed} from "vue";
 import _ from "lodash";
-
-const defaults = inject('vueButtonDefaults');
+import {defaultClasses} from "../../defaults";
 
 const props = defineProps({
     variant: {
@@ -34,22 +33,22 @@ const props = defineProps({
     }
 });
 
-const classes = computed(() => {
-    return (props.outline
-                ? _.get(defaults, props.variant + '.outline.classes')
-                : _.get(defaults, props.variant + '.solid.classes')
-        ).concat(props.disabled ? ['cursor-not-allowed'] : [])
-});
+const classes = computed(
+    () => (props.outline
+        ? _.get(defaultClasses, props.variant + '.outline.classes')
+        : _.get(defaultClasses, props.variant + '.solid.classes')
+    ).concat(props.disabled ? ['cursor-not-allowed'] : [])
+);
 
-const baseClasses = computed(() => {
-    return _.get(defaults, props.variant + '.baseClasses')
-});
+const baseClasses = computed(
+    () => _.get(defaultClasses, props.variant + '.baseClasses')
+);
 
-const insetClasses = computed(() => {
-    return props.outline
-        ? _.get(defaults, props.variant + '.outline.insetClasses')
-        : _.get(defaults, props.variant + '.solid.insetClasses')
-});
+const insetClasses = computed(
+    () => props.outline
+        ? _.get(defaultClasses, props.variant + '.outline.insetClasses')
+        : _.get(defaultClasses, props.variant + '.solid.insetClasses')
+);
 
 </script>
 

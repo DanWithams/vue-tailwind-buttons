@@ -20,5 +20,8 @@
     "lodash": "^4.17.21",
     "tailwind-helpers": "https://github.com/DanWithams/tailwind-helpers#v1.0.0",
     "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "fs": "^0.0.1-security"
   }
 }
