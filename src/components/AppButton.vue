@@ -13,9 +13,7 @@
 
 import {computed} from "vue";
 import _ from "lodash";
-import {getDefaultClasses} from "../../defaults";
-
-const defaultClasses = getDefaultClasses();
+import {defaultClasses} from "../../defaults";
 
 const props = defineProps({
     variant: {
