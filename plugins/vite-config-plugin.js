@@ -1,76 +1,50 @@
 import { readFileSync } from 'fs';
 import path from 'path';
 
+// Async function to load config
+async function loadConfig() {
+    const configPath = path.resolve(process.cwd(), 'vue-tailwind-button.config.js');
+    try {
+        const configModule = await import(configPath);
+        return configModule.default || {};
+    } catch (error) {
+        console.error('Failed to load config:', error);
+        return {};
+    }
+}
+
 export default function configPlugin(options = {}) {
-    const configPath = options.configPath || path.resolve(process.cwd(), 'vue-tailwind-button.config.json');
+    let configData = {}
 
     return {
         name: 'vue-tailwind-buttons-vite-plugin', // required, will show up in warnings and errors
-        // enforce: 'pre',        // run before other plugins
+        enforce: 'pre',        // run before other plugins
+        async configResolved(config) {
+            // Load config when Vite resolves its config
+            configData = await loadConfig();
+        },
         config() {
-            // Parse the configuration file
-            const configData = JSON.parse(readFileSync(configPath, 'utf-8'));
-
             // Return a modified configuration object
             return {
                 define: {
-                    __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
+                    __VUE_TAILWIND_BUTTONS_EXTERNAL_CONFIG__: JSON.stringify(configData),
                 },
             };
         },
         handleHotUpdate({ file, server }) {
             if (file === configPath) {
-                // console.log(`Reloading configuration due to change in ${file}`);
-                // // Re-import the config file
-                // const configData = JSON.parse(readFileSync(configPath, 'utf-8'));
-                // // Update the define values
-                // server.config.define = {
-                //     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
-                // };
-                // // Trigger a full reload
-                // server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
-                // server.ws.send({
-                //     type: 'full-reload',
-                // });
-                // return [];
-
                 console.log(`Reloading configuration due to change in ${file}`);
-
-
-                const allModules = Array.from(server.moduleGraph.urlToModuleMap.values());
-                console.log(allModules);
-                allModules.forEach(module => {
-                    console.log(module.file); // Logs the absolute path of each module
-                });
-
-                // Attempt to read and parse the config file
-                let configData;
-                try {
-                    configData = JSON.parse(readFileSync(configPath, 'utf-8'));
-                } catch (e) {
-                    console.error(`Error reading or parsing config file: ${e}`);
-                    return []; // Optionally, handle this error more gracefully
-                }
-
+                // Re-import the config file
+                const configData = JSON.parse(readFileSync(configPath, 'utf-8'));
                 // Update the define values
-                try {
-                    server.config.define = {
-                        __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
-                    };
-                } catch (e) {
-                    console.error(`Error updating server config defines: ${e}`);
-                }
-
+                server.config.define = {
+                    __VUE_TAILWIND_BUTTONS_EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
+                };
                 // Trigger a full reload
-                try {
-                    server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
-                    server.ws.send({
-                        type: 'full-reload',
-                    });
-                } catch (e) {
-                    console.error(`Error triggering full reload: ${e}`);
-                }
-
+                server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
+                server.ws.send({
+                    type: 'full-reload',
+                });
                 return [];
             }
         }
