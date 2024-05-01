@@ -29,7 +29,7 @@ export default function configPlugin(options = {}) {
                 },
             };
         },
-        async handleHotUpdate({ file, server }) {
+        async configPlugin({ file, server }) {
             if (file === configPath) {
                 console.log(`Reloading configuration due to change in ${file}`);
                 // Re-import the config file
@@ -40,12 +40,14 @@ export default function configPlugin(options = {}) {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
 
-                const allModules = Array.from(server.moduleGraph.urlToModuleMap.values());
-                allModules.forEach(module => {
-                    console.log('allModules', module.file); // Logs the absolute path of each module
-                });
+                const modulePath = path.resolve('defaults.js');
+                const module = server.moduleGraph.getModuleById(modulePath);
 
-                server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
+                if (module) {
+                    // Invalidate the module to force a re-import
+                    await server.moduleGraph.invalidateModule(module);
+                }
+
                 server.ws.send({
                     type: 'full-reload',
                 });
