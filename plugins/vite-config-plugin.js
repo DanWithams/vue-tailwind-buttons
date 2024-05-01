@@ -43,8 +43,9 @@ export default function configPlugin(options = {}) {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
 
-                const modulePath = path.resolve(__dirname, '../defaults.js');
+                const modulePath = path.resolve(__dirname, '../');
 
+                console.log('modulePath', modulePath);
                 console.log('idToModuleMap', Array.from(server.moduleGraph.idToModuleMap.keys()));
 
                 for (const [id, module] of server.moduleGraph.idToModuleMap.entries()) {
