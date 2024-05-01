@@ -6,7 +6,7 @@ async function loadConfig(configPath) {
     // delete require.cache[require.resolve(configPath)];
     try {
         const configModule = await import(configPath + '?update=' + new Date().getTime());
-        console.log(configModule);
+        console.log('loadConfig', JSON.stringify(configData));
         return configModule.default || {};
     } catch (error) {
         console.error('Failed to load config:', error);
@@ -16,10 +16,6 @@ async function loadConfig(configPath) {
 
 export default function configPlugin(options = {}) {
     const configPath = path.resolve(process.cwd(), 'vue-tailwind-button.config.js');
-
-
-
-
     let configData = {}
 
     return {
