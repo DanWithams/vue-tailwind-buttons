@@ -21,7 +21,7 @@ export default function configPlugin(options = {}) {
     const configPath = path.resolve(process.cwd(), 'vue-tailwind-button.config.js');
     return {
         name: 'vue-tailwind-buttons-vite-plugin', // required, will show up in warnings and errors
-        // enforce: 'pre',        // run before other plugins
+        enforce: 'post',        // run before other plugins
         async config() {
             // Return a modified configuration object
             const configData = await loadConfig(configPath);
