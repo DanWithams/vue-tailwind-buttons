@@ -38,6 +38,7 @@ export default function configPlugin(options = {}) {
 
 
                 const allModules = Array.from(server.moduleGraph.urlToModuleMap.values());
+                console.log(allModules);
                 allModules.forEach(module => {
                     console.log(module.file); // Logs the absolute path of each module
                 });
