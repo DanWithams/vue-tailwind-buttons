@@ -7,7 +7,7 @@ export default function configPlugin() {
         enforce: 'pre',        // run before other plugins
         config() {
             // Read and parse the configuration file
-            const configPath = path.resolve(process.cwd(), 'config/config.json');
+            const configPath = path.resolve(process.cwd(), 'vue-tailwind-button.config.json');
             const configData = JSON.parse(readFileSync(configPath, 'utf-8'));
 
             // Return a modified configuration object
