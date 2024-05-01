@@ -56,6 +56,11 @@ export default function configPlugin(options = {}) {
                         server.moduleGraph.invalidateModule(module);
                     }
                 }
+
+                server.ws.send({
+                    type: 'full-reload',
+                });
+
                 return [];
             }
         }
