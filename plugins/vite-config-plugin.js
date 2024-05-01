@@ -40,7 +40,7 @@ export default function configPlugin(options = {}) {
                     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 };
 
-                console.log('moduleGraph', JSON.stringify(server.moduleGraph.urlToModuleMap.values()));
+                console.log('moduleGraph', JSON.stringify({data:server.moduleGraph.urlToModuleMap.values()}));
 
                 server.moduleGraph.invalidateAll(); // Invalidate the entire module graph to force a re-import
                 server.ws.send({
