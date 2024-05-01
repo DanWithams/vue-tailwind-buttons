@@ -2,8 +2,7 @@ import { readFileSync } from 'fs';
 import path from 'path';
 
 // Async function to load config
-async function loadConfig() {
-    const configPath = path.resolve(process.cwd(), 'vue-tailwind-button.config.js');
+async function loadConfig(configPath) {
     try {
         const configModule = await import(configPath);
         return configModule.default || {};
@@ -14,6 +13,7 @@ async function loadConfig() {
 }
 
 export default function configPlugin(options = {}) {
+    const configPath = path.resolve(process.cwd(), 'vue-tailwind-button.config.js');
     let configData = {}
 
     return {
@@ -21,7 +21,7 @@ export default function configPlugin(options = {}) {
         enforce: 'pre',        // run before other plugins
         async configResolved(config) {
             // Load config when Vite resolves its config
-            configData = await loadConfig();
+            configData = await loadConfig(configPath);
         },
         config() {
             // Return a modified configuration object
