@@ -24,7 +24,7 @@ export default function configPlugin(options = {}) {
 
     return {
         name: 'vue-tailwind-buttons-vite-plugin', // required, will show up in warnings and errors
-        enforce: 'pre',        // run before other plugins
+        // enforce: 'pre',        // run before other plugins
         async configResolved(config) {
             // Load config when Vite resolves its config
             configData = await loadConfig(configPath);
