@@ -6,6 +6,7 @@ async function loadConfig(configPath) {
     // delete require.cache[require.resolve(configPath)];
     try {
         const configModule = await import(configPath + '?update=' + new Date().getTime());
+        console.log(configModule);
         return configModule.default || {};
     } catch (error) {
         console.error('Failed to load config:', error);
