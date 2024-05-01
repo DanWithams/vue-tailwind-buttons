@@ -41,8 +41,9 @@ export default function configPlugin(options = {}) {
                 };
 
                 const modulePath = path.resolve('defaults.js');
+                console.log('modulePath', modulePath);
                 const module = server.moduleGraph.getModuleById(modulePath);
-
+                console.log('module', module);
                 if (module) {
                     // Invalidate the module to force a re-import
                     await server.moduleGraph.invalidateModule(module);
