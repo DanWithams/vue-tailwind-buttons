@@ -25,12 +25,13 @@ export default function configPlugin(options = {}) {
             // Load config when Vite resolves its config
             configData = await loadConfig(configPath);
         },
-        config() {
+        async config() {
             // Return a modified configuration object
-            console.log('config()', configData)
+            const a = await loadConfig(configPath);
+            console.log('config()', a)
             return {
                 define: {
-                    __EXTERNAL_CONFIG__: JSON.stringify(configData),
+                    __EXTERNAL_CONFIG__: JSON.stringify(a),
                 },
             };
         },
