@@ -40,6 +40,7 @@ export default function configPlugin(options = {}) {
                 // Update the define values
                 console.log('handleHotUpdate()', JSON.stringify(configData || {}));
 
+                console.log('__EXTERNAL_CONFIG__', server.config.define.__EXTERNAL_CONFIG__);
                 server.config.define.__EXTERNAL_CONFIG__ = JSON.stringify(configData || {});
 
                 const allModules = Array.from(server.moduleGraph.urlToModuleMap.values());
