@@ -27,7 +27,7 @@ export default function configPlugin(options = {}) {
             // Return a modified configuration object
             return {
                 define: {
-                    __VUE_TAILWIND_BUTTONS_EXTERNAL_CONFIG__: JSON.stringify(configData),
+                    __EXTERNAL_CONFIG__: JSON.stringify(configData),
                 },
             };
         },
@@ -39,10 +39,10 @@ export default function configPlugin(options = {}) {
                 // Update the define values
                 console.log(JSON.stringify(configData || {}));
                 // server.config.define = {
-                //     __VUE_TAILWIND_BUTTONS_EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
+                //     __EXTERNAL_CONFIG__: JSON.stringify(configData || {}),
                 // };
                 server.config.define = {
-                    __VUE_TAILWIND_BUTTONS_EXTERNAL_CONFIG__: JSON.stringify({
+                    __EXTERNAL_CONFIG__: JSON.stringify({
                         "primary": {
                             "solid": {
                                 "classes": [
